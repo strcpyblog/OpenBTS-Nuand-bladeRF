@@ -1,0 +1,52 @@
+#
+# Copyright 2008 Free Software Foundation, Inc.
+# Copyright 2014 Range Networks, Inc.
+#
+# This software is distributed under the terms of the GNU Public License.
+# See the COPYING file in the main directory for details.
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+
+AM_CPPFLAGS = $(STD_DEFINES_AND_INCLUDES)
+AM_CXXFLAGS := -Wall -lrt -pthread -DTIMESTAMP_ISO=`date +'"%Y-%m-%dT%H:%M:%S"'`
+
+REPOREV = -D'REPO_REV="$(shell ./$(top_builddir)/Globals/GrabRepoInfo.sh $(top_builddir))"'
+
+COMMON_INCLUDEDIR = $(top_srcdir)/CommonLibs
+GSM_INCLUDEDIR = $(top_srcdir)/GSM
+SMS_INCLUDEDIR = $(top_srcdir)/SMS
+GLOBALS_INCLUDEDIR = $(top_srcdir)/Globals
+SR_INCLUDEDIR = $(top_srcdir)/SR
+NODEMANAGER_INCLUDEDIR = $(top_srcdir)/NodeManager
+JSONBOX_INCLUDEDIR = $(top_srcdir)/NodeManager/JsonBox-0.4.3/include
+
+STD_DEFINES_AND_INCLUDES = \
+	$(REPOREV) \
+	-DSR_API_ONLY \
+	-I$(COMMON_INCLUDEDIR) \
+	-I$(GSM_INCLUDEDIR) \
+	-I$(SMS_INCLUDEDIR) \
+	-I$(GLOBALS_INCLUDEDIR) \
+	-I$(SR_INCLUDEDIR) \
+	-I$(NODEMANAGER_INCLUDEDIR) \
+	-I$(JSONBOX_INCLUDEDIR)
+
+COMMON_LA = $(top_builddir)/CommonLibs/libcommon.la
+GSM_LA = $(top_builddir)/GSM/libGSM.la
+SMS_LA = $(top_builddir)/SMS/libSMS.la
+GLOBALS_LA = $(top_builddir)/Globals/libglobals.la
+NODEMANAGER_LA = $(top_builddir)/NodeManager/libnodemanager.la -lzmq
+
+MOSTLYCLEANFILES = *~

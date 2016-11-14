@@ -1,0 +1,17 @@
+Source: range-configs
+Section: comm
+Priority: optional
+Maintainer: Range Networks, Inc. <info@rangenetworks.com>
+Homepage: http://www.rangenetworks.com/
+Build-Depends: build-essential, debhelper (>= 7)
+Standards-Version: 3.7.3
+
+
+Package: range-configs
+Section: comm
+Priority: optional
+Architecture: all
+Essential: no
+Depends: ntp, ntpdate, bind9, resolvconf
+Replaces: bind9 (<< 1:9.8.1)
+Description: Range Networks - Misc Default Configurations

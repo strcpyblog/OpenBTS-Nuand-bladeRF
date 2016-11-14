@@ -1,0 +1,16 @@
+Source: smqueue
+Section: comm
+Priority: optional
+Maintainer: Range Networks, Inc. <info@rangenetworks.com>
+Homepage: http://www.rangenetworks.com/
+Build-Depends: build-essential, debhelper (>= 7), libtool, pkg-config, autoconf, libsqlite3-dev, libosip2-dev, libzmq3-dev, libzmq3 | libzmq5
+Standards-Version: 3.7.3
+
+Package: smqueue
+Section: comm
+Priority: optional
+Architecture: any
+Essential: no
+Depends: sqlite3, libosip2-4 | libosip2-10 | libosip2-11, libzmq3 | libzmq5
+Description: Range Networks - SMQueue RFC-3428 Store and Forward Server
+

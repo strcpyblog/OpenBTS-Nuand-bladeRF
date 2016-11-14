@@ -1,0 +1,37 @@
+language: cpp
+compiler: gcc
+
+notifications:
+  irc:
+    channels:
+      - "chat.freenode.net#openbts"
+    template:
+      - "%{repository} : %{message} : %{build_url}"
+    on_success: change
+    on_failure: always
+
+git:
+  submodules: false
+
+before_install:
+ - sudo apt-get update 
+ - sudo apt-get install -qq libortp-dev libusb-1.0-0-dev libreadline-dev
+ - git clone https://github.com/RangeNetworks/liba53.git
+ - cd liba53
+ - dpkg-buildpackage -us -uc
+ - cd ..
+ - sudo dpkg -i liba53*.deb 
+ - git clone https://github.com/RangeNetworks/libcoredumper.git
+ - cd libcoredumper
+ - ./build.sh
+ - sudo dpkg -i *.deb
+ - cd ..
+ - git submodule update --init --recursive
+ - sudo ./NodeManager/install_libzmq.sh
+
+#install:
+#  - sh bootstrap.sh
+
+script:
+  - dpkg-buildpackage -us -uc
+
